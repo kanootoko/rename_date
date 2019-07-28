@@ -5,6 +5,7 @@ You need to start the script in folder where your files are holded or choose the
 
 ### Possible command line arguments
 + --help
+  Shows small help
 + --input_folder=<path/to/folder> or -if=<path/to/folder> [default: . ]
   It's the path to directory where files to rename are located.
 + --regular_expression=<regexp> or -re=<regexp> [default: .*\.([jJ][pP][gG]|[aA][vV][iI]|[tT][hH][mM]) ]
@@ -18,3 +19,6 @@ You need to start the script in folder where your files are holded or choose the
   It's the pattern to rename files. Their format will not be changed,
   and if there are some of them with the same patterned-names, "_#" with number will be added.
   Number will have leading zeros if needed. Default pattern leads to "Cam YYYY-MM-DD HH_SS_(#).format"-like output names.
++ --dry_run
+  Run script and output to console every operation which is to be done. You can use it to create bat-file of renaming, if you need.
+  Operations are printed anyway, but without this parameter, they are printed to stderr.

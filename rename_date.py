@@ -3,9 +3,10 @@ rename_date - this script allows to rename multiple files chosen by regular expr
 Usage: start script in folder where your files are holded or choose the directory by --input_folder command line argument.
 
 Possible command line arguments:
-	--input_folder=<path/to/folder> [default: . ]
-	--regular_expression=<regexp> [default: .*\\.([jJ][pP][gG]|[aA][vV][iI]|[tT][hH][mM])]
-	--output_pattern=<time.strftime pattern> [default: Cam %Y-%m-%d %H_%M_%S ]
+	--input_folder=<path/to/folder> [default: . ] - change input folder
+	--regular_expression=<regexp> [default: .*\\.([jJ][pP][gG]|[aA][vV][iI]|[tT][hH][mM])] - change input files choosing pattern
+	--output_pattern=<time.strftime pattern> [default: Cam %Y-%m-%d %H_%M_%S ] - change output files names pattern
+	--dry_run [off by defalut] - only show renaming commands, without launching them
 
 Version: 1.1 [2019.07.28]
 '''
