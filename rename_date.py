@@ -56,7 +56,8 @@ def main(argv: list):
 		parse_args(props, argv)
 	filenames_map = {}
 	for filename in filter(lambda f: os.path.isfile(props.path + os.path.sep + f) and re_match(props.re, f) is not None, os.listdir(props.path)):
-		t = int(os.stat(props.path + os.sep + filename).st_ctime)
+		t = (int(os.stat(props.path + os.sep + filename).st_ctime), \
+		     filename[filename.rfind('.'):] if '.' in filename else '')
 		if t in filenames_map:
 			if isinstance(filenames_map[t], str):
 				filenames_map[t] = [filenames_map[t], filename]
@@ -64,7 +65,7 @@ def main(argv: list):
 				filenames_map[t].append(filename)
 		else:
 			filenames_map.update({t: filename})
-	for t, filenames in filenames_map.items():
+	for (t, format), filenames in filenames_map.items():
 		if isinstance(filenames, str):
 			new_name = time.strftime(props.pattern, time.strptime(time.ctime(t))) + filenames[filenames.rfind('.'):]
 			print('rename "{}" "{}"'.format(os.path.abspath(props.path + os.path.sep + filenames), \
@@ -75,7 +76,7 @@ def main(argv: list):
 		else:
 			for i, filename in enumerate(filenames):
 				new_name = time.strftime(props.pattern, time.strptime(time.ctime(t)))
-				new_name += '_{0:0>{w}}{1}'.format(i + 1, filename[filename.rfind('.'):] if '.' in filename else '', w = ceil(log(len(filenames) + 1, 10)))
+				new_name += '_{0:0>{w}}{1}'.format(i + 1, format, w = ceil(log(len(filenames) + 1, 10)))
 				print('rename "{}" "{}"'.format(os.path.abspath(props.path + os.path.sep + filename), \
 				      os.path.abspath(props.path + os.path.sep + new_name)), \
 				      file = sys.stdout if props.dry_run else sys.stderr)
