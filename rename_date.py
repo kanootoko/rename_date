@@ -57,7 +57,7 @@ def main(argv: list):
 	filenames_map = {}
 	for filename in filter(lambda f: os.path.isfile(props.path + os.path.sep + f) and re_match(props.re, f) is not None, os.listdir(props.path)):
 		t = (int(os.stat(props.path + os.sep + filename).st_ctime), \
-		     filename[filename.rfind('.'):] if '.' in filename else '')
+		     (filename[filename.rfind('.'):] if '.' in filename else '').lower())
 		if t in filenames_map:
 			if isinstance(filenames_map[t], str):
 				filenames_map[t] = [filenames_map[t], filename]
@@ -67,7 +67,7 @@ def main(argv: list):
 			filenames_map.update({t: filename})
 	for (t, format), filenames in filenames_map.items():
 		if isinstance(filenames, str):
-			new_name = time.strftime(props.pattern, time.strptime(time.ctime(t))) + filenames[filenames.rfind('.'):]
+			new_name = time.strftime(props.pattern, time.strptime(time.ctime(t))) + format
 			print('rename "{}" "{}"'.format(os.path.abspath(props.path + os.path.sep + filenames), \
 			      os.path.abspath(props.path + os.path.sep + new_name)), \
 			      file = sys.stdout if props.dry_run else sys.stderr)
