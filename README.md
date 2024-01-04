@@ -1,4 +1,4 @@
-﻿# rename_date
+# rename_date
 
 ## Description
 

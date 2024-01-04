@@ -127,7 +127,7 @@ if __name__ == '__main__':
         )
         if time_and_extension in filenames_map:
             if isinstance(filenames_map[time_and_extension], str):
-                filenames_map[time_and_extension] = [filenames_map[t], filename] # type: ignore
+                filenames_map[time_and_extension] = [filenames_map[time_and_extension], filename] # type: ignore
             else:
                 filenames_map[time_and_extension].append(filename) # type: ignore
         else:
